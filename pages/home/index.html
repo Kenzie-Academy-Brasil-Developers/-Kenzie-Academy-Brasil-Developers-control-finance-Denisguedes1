@@ -1,19 +1,48 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Control Finance</title>
-    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
-    <meta name="description" content="Control Finance - Seu controle financeiro">
-    <link rel="stylesheet" href="/styles/globalStyles.css">
-    <link rel="stylesheet" href="index.css">
-</head>
-<body>
-    <main id="app"></main>
-    <script src="/scripts/modal.js"></script>
-    <script src="valuesData.js"></script>
-    <script src="index.js"></script>
-</body>
+    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon" />
+
+    <meta
+      name="description"
+      content="Control Finance - Seu controle financeiro"
+    />
+    <link rel="stylesheet" href="/styles/globalStyles.css" />
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="../../styles/home.css" />
+  </head>
+  <body>
+    <header class="navBar">
+      <h2 class="titulo color--color-brand-2">
+        Control <span class="colorBlack">Finance</span>
+      </h2>
+      <button
+        type="submit"
+        id="Registrar"
+        class="Registrar_Novo_valor fonts_Btnmodal"
+      >
+        Registrar Novo Valor
+      </button>
+    </header>
+    <nav class="nav_finan">
+      <h3 class="titulo2Nav">Resumo financeiro</h3>
+      <button id="somaTotal" class="btn_tdos">Todos</button>
+      <button id="entrada" class="entrada">Entrada</button>
+      <button id="saida" class="btnSaida">Saída</button>
+    </nav>
+    <section class="modal show_modal"></section>
+    <main id="app" class="conteiner">
+      <span class="input_soma">
+        <p class="tituloTotal">Soma dos Valores</p>
+        <p class="valorTotal">R$00,00</p>
+      </span>
+    </main>
+    <script type="module" src="/scripts/modal.js"></script>
+    <script type="module" src="valuesData.js"></script>
+    <script type="module" src="index.js"></script>
+  </body>
 </html>
