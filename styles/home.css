@@ -76,8 +76,19 @@
   font-weight: var(--font-weight-1);
   line-height: 1.05rem;
 }
-.btnSaida {
+.btnSaida2 {
   height: 1rem;
+  width: 4.37rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-family-1);
+  font-weight: var(--font-weight-1);
+  line-height: 1.05rem;
+}
+
+.btnSaida {
+  height: 2rem;
   width: 4.37rem;
   border-radius: 8px;
   border: none;

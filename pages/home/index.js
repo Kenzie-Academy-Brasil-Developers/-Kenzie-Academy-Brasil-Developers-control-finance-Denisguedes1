@@ -2,9 +2,8 @@
 import { insertedValues, valuesCategory } from "../../pages/home/valuesData.js";
 
 const identificarOIndex = valuesCategory;
-console.log(identificarOIndex);
+
 const valores = insertedValues;
-console.log(valores);
 
 export function renderizarAll() {
   valores.forEach((element) => {

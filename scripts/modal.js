@@ -95,7 +95,7 @@ function openModal(event) {
 <label class="bt bt-outline" tabindex="0" for="0">Entrada</label> */
   }
   button.setAttribute("class", "btnEntrada");
-  buttoSaida.setAttribute("class", "btnSaida");
+  buttoSaida.setAttribute("class", "btnSaida2");
   button.setAttribute("id", "1");
   buttoSaida.setAttribute("id", "2");
 
@@ -123,16 +123,9 @@ function verificarCheck() {
   if (document.getElementById("1").checked == true) {
     entrada.innerText = "entrada";
     return entrada.id;
-    // insertedValues.push({
-    //   categoryID: entrada.id,
-    // });
   } else {
     saida.innerText = "saida";
     return saida.id;
-    console.log("hoi");
-
-    // insertedValues.push({ categoryID: saida.id });
-    console.log(saida);
   }
   console.log(entrada);
   console.log(insertedValues);
@@ -144,7 +137,7 @@ function closeModal(modal) {
   modal.innerHTML = "";
 }
 
-function novoValor(data) {
+function novoValor(data, categoryID) {
   const ul = document.createElement("ul");
   const li = document.createElement("li");
   li.setAttribute("class", "valores");
@@ -155,6 +148,11 @@ function novoValor(data) {
   const buttonName = document.createElement("button");
   const buttonexcluir = document.createElement("button");
   const main = document.querySelector(".conteiner");
+  if (categoryID === 1) {
+    buttonName.innerText = "Entrada";
+  } else {
+    buttonName.innerText = "Saida";
+  }
 
   spanbutton.setAttribute("class", "SpanButon");
   buttonexcluir.setAttribute("class", "lixeira");
@@ -172,9 +170,6 @@ function novoValor(data) {
 
   spanbutton.append(buttonName, buttonexcluir);
   return parseInt(input.value);
-  // // insertedValues.push({
-  //   value: parseInt(input.value),
-  // });
 }
 
 function responsavelCadastro() {
