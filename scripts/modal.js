@@ -49,12 +49,10 @@ function openModal(event) {
   butonREg.innerText = "Registrar";
   // buttonregistrar
   butonREg.addEventListener("click", () => {
-    novoValor();
-    const inputValue = document.getElementById("inputValue");
-    const entrada = document.getElementById("1");
-    const saida = document.getElementById("2");
-
+    // novoValor();
+    // const inputValue = document.getElementById("inputValue");
     somaValores(insertedValues);
+    responsavelCadastro();
 
     // renderAll();
   });
@@ -89,8 +87,8 @@ function openModal(event) {
   buttonCancelar.innerText = "Cancelar";
   buttonCancelar.setAttribute("class", "btnCancel");
 
-  button.innerText = "Entrada";
-  buttoSaida.innerText = "Saida";
+  // button.innerText = "Entrada";
+  // buttoSaida.innerText = "Saida";
 
   {
     /* <input type="radio" hidden id="0" value="0" name="valueType">
@@ -119,6 +117,26 @@ function openModal(event) {
 
   section.append(divModalBox);
 }
+function verificarCheck() {
+  const entrada = document.getElementById("1");
+  const saida = document.getElementById("2");
+  if (document.getElementById("1").checked == true) {
+    entrada.innerText = "entrada";
+    return entrada.id;
+    // insertedValues.push({
+    //   categoryID: entrada.id,
+    // });
+  } else {
+    saida.innerText = "saida";
+    return saida.id;
+    console.log("hoi");
+
+    // insertedValues.push({ categoryID: saida.id });
+    console.log(saida);
+  }
+  console.log(entrada);
+  console.log(insertedValues);
+}
 
 function closeModal(modal) {
   console.log("hola mundo");
@@ -144,28 +162,40 @@ function novoValor(data) {
 
   //inserir valores no meu arr
   buttonexcluir.innerText = "excluir";
-  buttonName.innerText = "Entrada";
+
   valor.innerText = `R$ ${input.value}`;
+  console.log(input);
 
   li.append(value, valor, spanbutton);
   ul.appendChild(li);
   main.appendChild(ul);
 
   spanbutton.append(buttonName, buttonexcluir);
+  return parseInt(input.value);
+  // // insertedValues.push({
+  //   value: parseInt(input.value),
+  // });
+}
 
+function responsavelCadastro() {
+  const Categoriaid = verificarCheck();
+  const valor = novoValor();
   insertedValues.push({
-    value: input.value,
-    categoryID: 1,
+    value: valor,
+    categoryID: Categoriaid,
   });
-
-  const newArr = insertedValues.map((elem, index) => {
+  const arrayTratado = criarId(insertedValues);
+  console.log(arrayTratado);
+}
+function criarId(array) {
+  const newArr = array.map((elem, index) => {
     return {
-      categoryId: elem,
       id: index,
+      ...elem,
     };
   });
 
-  console.log(newArr);
+  return newArr;
 }
 
 function somaValores(data) {
@@ -180,5 +210,6 @@ function somaValores(data) {
     (valor, result) => parseInt(valor) + parseInt(result),
     0
   )}`;
+  console.log(totally);
 }
 somaValores(data);
