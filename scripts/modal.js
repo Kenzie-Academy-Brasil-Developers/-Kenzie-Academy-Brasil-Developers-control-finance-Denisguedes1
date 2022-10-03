@@ -4,7 +4,6 @@ import { insertedValues, valuesCategory } from "../pages/home/valuesData.js";
 const renderAll = renderizarAll;
 const data = insertedValues;
 const category = valuesCategory;
-console.log(data);
 
 const btnRegistrer = document.getElementById("Registrar");
 
@@ -18,7 +17,6 @@ function openModal(event) {
 
   const modal = document.querySelector(".modal");
   modal.classList.toggle("show_modal");
-  console.log("heloow world");
 
   const bodyConteiner = document.querySelector("body");
 
@@ -47,32 +45,30 @@ function openModal(event) {
   const butonREg = document.createElement("button");
   butonREg.setAttribute("class", "btn-register");
   butonREg.innerText = "Registrar";
-  // buttonregistrar
+
   butonREg.addEventListener("click", () => {
-    // novoValor();
-    // const inputValue = document.getElementById("inputValue");
     somaValores(insertedValues);
     responsavelCadastro();
-
-    // renderAll();
+    // novoValor();
   });
 
   const button = document.createElement("input");
   button.setAttribute("class", "btnEntrada");
   button.setAttribute("type", "radio");
   button.setAttribute("id", "1");
-  button.setAttribute("value", "0");
+  button.setAttribute("value", "1");
   button.setAttribute("name", "valueType");
   const label = document.createElement("label");
   label.setAttribute("class", "labelBt");
   label.setAttribute("tabindex", "0");
   label.setAttribute("for", "0");
   label.innerText = "Entrada";
+
   const buttoSaida = document.createElement("input");
 
   buttoSaida.setAttribute("type", "radio");
   buttoSaida.setAttribute("id", "2");
-  buttoSaida.setAttribute("value", "0");
+  buttoSaida.setAttribute("value", "2");
   buttoSaida.setAttribute("name", "valueType");
   const labelSaida = document.createElement("label");
   labelSaida.setAttribute("class", "labelBt");
@@ -87,13 +83,6 @@ function openModal(event) {
   buttonCancelar.innerText = "Cancelar";
   buttonCancelar.setAttribute("class", "btnCancel");
 
-  // button.innerText = "Entrada";
-  // buttoSaida.innerText = "Saida";
-
-  {
-    /* <input type="radio" hidden id="0" value="0" name="valueType">
-<label class="bt bt-outline" tabindex="0" for="0">Entrada</label> */
-  }
   button.setAttribute("class", "btnEntrada");
   buttoSaida.setAttribute("class", "btnSaida2");
   button.setAttribute("id", "1");
@@ -120,24 +109,20 @@ function openModal(event) {
 function verificarCheck() {
   const entrada = document.getElementById("1");
   const saida = document.getElementById("2");
+
   if (document.getElementById("1").checked == true) {
-    entrada.innerText = "entrada";
     return entrada.id;
   } else {
-    saida.innerText = "saida";
     return saida.id;
   }
-  console.log(entrada);
-  console.log(insertedValues);
 }
 
 function closeModal(modal) {
-  console.log("hola mundo");
   modal.classList.toggle("show_modal");
   modal.innerHTML = "";
 }
 
-function novoValor(data, categoryID) {
+function novoValor(categoryID) {
   const ul = document.createElement("ul");
   const li = document.createElement("li");
   li.setAttribute("class", "valores");
@@ -148,7 +133,7 @@ function novoValor(data, categoryID) {
   const buttonName = document.createElement("button");
   const buttonexcluir = document.createElement("button");
   const main = document.querySelector(".conteiner");
-  if (categoryID === 1) {
+  if (categoryID == 1) {
     buttonName.innerText = "Entrada";
   } else {
     buttonName.innerText = "Saida";
@@ -161,31 +146,34 @@ function novoValor(data, categoryID) {
   //inserir valores no meu arr
   buttonexcluir.innerText = "excluir";
 
-  valor.innerText = `R$ ${input.value}`;
-  console.log(input);
+  valor.innerText = `R$ ${Number(input.value)}`;
 
   li.append(value, valor, spanbutton);
   ul.appendChild(li);
   main.appendChild(ul);
 
   spanbutton.append(buttonName, buttonexcluir);
-  return parseInt(input.value);
+  console.log(input.value);
+
+  return Number(input.value);
 }
 
 function responsavelCadastro() {
-  const Categoriaid = verificarCheck();
-  const valor = novoValor();
+  const Categoriaid = parseInt(verificarCheck());
+  const valor = novoValor(Categoriaid);
+
   insertedValues.push({
     value: valor,
-    categoryID: Categoriaid,
+    categoryID: parseInt(Categoriaid),
   });
+
   const arrayTratado = criarId(insertedValues);
   console.log(arrayTratado);
 }
 function criarId(array) {
   const newArr = array.map((elem, index) => {
     return {
-      id: index,
+      id: index + 1,
       ...elem,
     };
   });
@@ -194,17 +182,18 @@ function criarId(array) {
 }
 
 function somaValores(data) {
+  console.log(data);
   const total = document.querySelector(".valorTotal");
   total.innerHTML = "";
-  let totally = [];
-  data.forEach((valor) => {
-    totally.push(valor.value);
-  });
+  let resultado = [];
 
-  total.innerText = `R$ ${totally.reduce(
-    (valor, result) => parseInt(valor) + parseInt(result),
+  data.forEach((valor) => {
+    resultado.push(valor.value);
+    console.log(valor.value);
+  });
+  console.log(resultado);
+  total.innerText = `R$ ${resultado.reduce(
+    (valor, result) => valor + result,
     0
   )}`;
-  console.log(totally);
 }
-somaValores(data);
