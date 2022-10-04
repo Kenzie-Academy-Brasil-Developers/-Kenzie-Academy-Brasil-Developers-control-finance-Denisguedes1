@@ -132,6 +132,12 @@ function novoValor(categoryID) {
   const spanbutton = document.createElement("span");
   const buttonName = document.createElement("button");
   const buttonexcluir = document.createElement("button");
+
+  buttonexcluir.addEventListener("click", (e) => {
+    e.preventDefault();
+    console.log("hoi mundo");
+  });
+
   const main = document.querySelector(".conteiner");
   if (categoryID == 1) {
     buttonName.innerText = "Entrada";
@@ -153,7 +159,6 @@ function novoValor(categoryID) {
   main.appendChild(ul);
 
   spanbutton.append(buttonName, buttonexcluir);
-  console.log(input.value);
 
   return Number(input.value);
 }
@@ -168,7 +173,10 @@ function responsavelCadastro() {
   });
 
   const arrayTratado = criarId(insertedValues);
+  filtradosEntrada(arrayTratado);
+  filtradoSaida(arrayTratado);
   console.log(arrayTratado);
+  renderTodos(arrayTratado);
 }
 function criarId(array) {
   const newArr = array.map((elem, index) => {
@@ -180,20 +188,77 @@ function criarId(array) {
 
   return newArr;
 }
+function filtradosEntrada(arr) {
+  const btnEntrada = document.getElementById("entrada");
+  btnEntrada.addEventListener("click", (e) => {
+    e.preventDefault();
+    const filterEntrada = arr.filter((categ) => categ.categoryID === 1);
+    renderizarAll(filterEntrada);
+    somaValores(filterEntrada);
+  });
+}
 
-function somaValores(data) {
+function filtradoSaida(arr) {
+  const btnSaida = document.getElementById("saida");
+  btnSaida.addEventListener("click", (e) => {
+    e.preventDefault();
+    const filterSaida = arr.filter((categ) => categ.categoryID === 2);
+    renderizarAll(filterSaida);
+    somaValoresSaida(filterSaida);
+  });
+}
+
+function renderTodos() {
+  const btnAll = document.getElementById("somaTotal");
+  btnAll.addEventListener("click", (e) => {
+    e.preventDefault();
+    renderizarAll(insertedValues);
+    somaValores(insertedValues);
+  });
+}
+
+function somaValoresSaida(data) {
   console.log(data);
   const total = document.querySelector(".valorTotal");
-  total.innerHTML = "";
+  // total.innerHTML = "";
   let resultado = [];
 
   data.forEach((valor) => {
     resultado.push(valor.value);
-    console.log(valor.value);
+    console.log(valor);
   });
   console.log(resultado);
-  total.innerText = `R$ ${resultado.reduce(
+  total.innerText = `R$- ${resultado.reduce(
     (valor, result) => valor + result,
     0
   )}`;
 }
+function somaValores(data) {
+  const total = document.getElementById("total");
+
+  let resultado = [];
+
+  data.forEach((valor) => {
+    resultado.push(valor.value);
+  });
+
+  const price = resultado.reduce((valor, result) => valor + result, 0);
+
+  total.innerText = `R$ ${price}`;
+}
+// function somaValores(data) {
+//   console.log(data);
+//   const total = document.querySelector(".valorTotal");
+//   // total.innerHTML = "";
+//   let resultado = [];
+//   console.log(total);
+//   data.forEach((valor) => {
+//     resultado.push(valor.value);
+//     console.log(valor.value);
+//   });
+//   console.log(resultado);
+//   total.innerText = `R$ ${resultado.reduce(
+//     (valor, result) => valor + result,
+//     0
+//   )}`;
+// }

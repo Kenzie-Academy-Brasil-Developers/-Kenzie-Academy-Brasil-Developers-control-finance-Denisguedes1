@@ -1,16 +1,15 @@
-/* Desenvolva sua lógica aqui */
 import { insertedValues, valuesCategory } from "../../pages/home/valuesData.js";
 
 const identificarOIndex = valuesCategory;
 
 const valores = insertedValues;
-
 export function renderizarAll(arr) {
   const main = document.querySelector(".conteinerUL");
   main.innerHTML = "";
   arr.forEach((element) => {
     const SomaTotal = document.createElement("p");
     const ul = document.createElement("ul");
+    ul.innerHTML = "";
     const li = document.createElement("li");
 
     li.setAttribute("class", "valores");
@@ -37,15 +36,14 @@ export function renderizarAll(arr) {
       button.innerText = "saida";
     }
     excluir.innerText = "remover";
-    ul.append(li);
+
     spanbtn.append(button, excluir);
     li.append(SomaTotal, valores, spanbtn);
-    main.append(ul);
-
+    ul.append(li);
+    main.appendChild(ul);
     somaValores(insertedValues);
   });
 }
-
 function filtradosEntrada(arr) {
   const btnEntrada = document.getElementById("entrada");
   btnEntrada.addEventListener("click", (e) => {
@@ -79,35 +77,33 @@ function renderTodos() {
 renderTodos(insertedValues);
 
 function somaValores(data) {
-  const total = document.getElementById("total");
-
+  const total = document.querySelector(".valorTotal");
+  total.innerHTML = "";
   let resultado = [];
 
   data.forEach((valor) => {
     resultado.push(valor.value);
+    console.log(valor.value);
   });
-
-  const price = resultado.reduce((valor, result) => valor + result, 0);
-
-  total.innerText = `R$ ${price}`;
+  console.log(resultado);
+  total.innerText = `R$ ${resultado.reduce(
+    (valor, result) => valor + result,
+    0
+  )}`;
 }
 function somaValoresSaida(data) {
+  console.log(data);
   const total = document.querySelector(".valorTotal");
-  // total.innerHTML = "";
+  total.innerHTML = "";
   let resultado = [];
 
   data.forEach((valor) => {
     resultado.push(valor.value);
+    console.log(valor.value);
   });
-
+  console.log(resultado);
   total.innerText = `R$- ${resultado.reduce(
     (valor, result) => valor + result,
     0
   )}`;
 }
-// function remover(arr) {
-//   const btnRemove = document.querySelector(".lixeira");
-//   lixeira.addEventlistener("clic", (e) => {
-//     console.log("hoi");
-//   });
-// }

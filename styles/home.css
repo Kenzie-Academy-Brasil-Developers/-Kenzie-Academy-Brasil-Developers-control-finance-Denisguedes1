@@ -255,9 +255,14 @@ ul {
   display: flex;
   align-items: center;
 }
+.conteinerUL {
+  height: 8rem;
+  width: 66rem;
+}
 .valores {
   height: 42px;
-  width: 1288px;
+  width: 65%;
+
   margin-right: 35rem;
   top: 0px;
   border-radius: 8px;
@@ -307,7 +312,7 @@ ul {
   padding: 7px 14px 7px 14px;
 }
 .input_soma {
-  margin-left: 17rem;
+  margin-left: 12rem;
   display: flex;
   gap: 17rem;
   height: 44px;
