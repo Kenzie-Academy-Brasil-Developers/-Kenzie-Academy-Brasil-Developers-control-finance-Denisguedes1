@@ -20,12 +20,6 @@ export function renderizarAll(arr) {
     const excluir = document.createElement("button");
     excluir.setAttribute("class", "remove");
     const button = document.createElement("button");
-    excluir.addEventListener("click", (e) => {
-      e.preventDefault();
-
-      const array = insertedValues.splice("1", "2", insertedValues.id);
-      remover(array);
-    });
 
     spanbtn.setAttribute("class", "btnSpan");
     button.setAttribute("class", "tipoDeMovimentacao");

@@ -91,6 +91,24 @@ function somaValores(data) {
     0
   )}`;
 }
+// function responsavelCadastro() {
+//   const Categoriaid = parseInt(verificarCheck());
+//   const valor = novoValor(elem);
+
+//   insertedValues.push({
+//     value: valor,
+//     categoryID: parseInt(Categoriaid),
+//   });
+//   console.log(insertedValues);
+
+// buttonexcluir.findIndex((e) => {
+//   e.addEventListener("click", () => {
+//     const index = insertedValues.find((element) => {
+//       return element.id === e.id;
+//     });
+//     insertedValues.splice(insertedValues.findIndex(index), 1);
+//   });
+// });
 function somaValoresSaida(data) {
   console.log(data);
   const total = document.querySelector(".valorTotal");

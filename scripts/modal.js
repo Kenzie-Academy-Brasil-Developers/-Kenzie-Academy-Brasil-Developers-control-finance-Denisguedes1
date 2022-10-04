@@ -49,7 +49,6 @@ function openModal(event) {
   butonREg.addEventListener("click", () => {
     somaValores(insertedValues);
     responsavelCadastro();
-    // novoValor();
   });
 
   const button = document.createElement("input");
@@ -132,13 +131,19 @@ function novoValor(categoryID) {
   const spanbutton = document.createElement("span");
   const buttonName = document.createElement("button");
   const buttonexcluir = document.createElement("button");
+  buttonexcluir.setAttribute("id", "remove");
 
   buttonexcluir.addEventListener("click", (e) => {
-    e.preventDefault();
-    console.log("hoi mundo");
+    const index = insertedValues.findIndex((element) => {
+      return element.id === e.id;
+    });
+    console.log(insertedValues);
+    insertedValues.splice(index, 1);
+    renderizarAll(insertedValues);
+    console.log(insertedValues);
   });
 
-  const main = document.querySelector(".conteiner");
+  const main = document.querySelector(".conteinerUL");
   if (categoryID == 1) {
     buttonName.innerText = "Entrada";
   } else {
@@ -146,10 +151,10 @@ function novoValor(categoryID) {
   }
 
   spanbutton.setAttribute("class", "SpanButon");
+
   buttonexcluir.setAttribute("class", "lixeira");
   buttonName.setAttribute("class", "btnName");
 
-  //inserir valores no meu arr
   buttonexcluir.innerText = "excluir";
 
   valor.innerText = `R$ ${Number(input.value)}`;
@@ -162,6 +167,25 @@ function novoValor(categoryID) {
 
   return Number(input.value);
 }
+function novaRender() {
+  insertedValues.forEach((elem) => {
+    const ul = document.createElement("ul");
+
+    const li = document.createElement("li");
+    li.setAttribute("class", "valores");
+    const input = document.getElementById("inputValue");
+    const valor = document.createElement("p");
+    const value = document.createElement("p");
+    const spanbutton = document.createElement("span");
+    const buttonName = document.createElement("button");
+    const buttonexcluir = document.createElement("button");
+    buttonexcluir.setAttribute("id", "remove");
+    li.append(value, valor, spanbutton);
+    ul.appendChild(li);
+    console.log("hoi");
+    spanbutton.append(buttonName, buttonexcluir);
+  });
+}
 
 function responsavelCadastro() {
   const Categoriaid = parseInt(verificarCheck());
@@ -173,10 +197,13 @@ function responsavelCadastro() {
   });
 
   const arrayTratado = criarId(insertedValues);
+
   filtradosEntrada(arrayTratado);
   filtradoSaida(arrayTratado);
-  console.log(arrayTratado);
   renderTodos(arrayTratado);
+  somaValores(arrayTratado);
+
+  console.log(arrayTratado);
 }
 function criarId(array) {
   const newArr = array.map((elem, index) => {
@@ -218,16 +245,14 @@ function renderTodos() {
 }
 
 function somaValoresSaida(data) {
-  console.log(data);
   const total = document.querySelector(".valorTotal");
   // total.innerHTML = "";
   let resultado = [];
 
   data.forEach((valor) => {
     resultado.push(valor.value);
-    console.log(valor);
   });
-  console.log(resultado);
+
   total.innerText = `R$- ${resultado.reduce(
     (valor, result) => valor + result,
     0
@@ -246,19 +271,3 @@ function somaValores(data) {
 
   total.innerText = `R$ ${price}`;
 }
-// function somaValores(data) {
-//   console.log(data);
-//   const total = document.querySelector(".valorTotal");
-//   // total.innerHTML = "";
-//   let resultado = [];
-//   console.log(total);
-//   data.forEach((valor) => {
-//     resultado.push(valor.value);
-//     console.log(valor.value);
-//   });
-//   console.log(resultado);
-//   total.innerText = `R$ ${resultado.reduce(
-//     (valor, result) => valor + result,
-//     0
-//   )}`;
-// }
